@@ -1,24 +1,38 @@
 --Jacob Nix Workout Tracker
 --10/16/2025
 
--- init.sql
-CREATE TABLE IF NOT EXISTS users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(50) UNIQUE NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- Drop tables if they already exist
+DROP TABLE IF EXISTS workout_exercises CASCADE;
+DROP TABLE IF EXISTS workouts CASCADE;
+DROP TABLE IF EXISTS exercises CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+
+-- Users Table
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS exercises (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100) UNIQUE NOT NULL
+-- Exercises Table (exercise library)
+CREATE TABLE exercises (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS workouts (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  exercise_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE,
-  sets INTEGER NOT NULL,
-  reps INTEGER NOT NULL,
-  weight NUMERIC(5,2),
-  workout_date DATE DEFAULT CURRENT_DATE
+-- Workouts Table
+CREATE TABLE workouts (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    workout_name VARCHAR(255) NOT NULL,
+    workout_date DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+-- Join Table: Workout Exercises
+CREATE TABLE workout_exercises (
+    id SERIAL PRIMARY KEY,
+    workout_id INT NOT NULL REFERENCES workouts(id) ON DELETE CASCADE,
+    exercise_id INT NOT NULL REFERENCES exercises(id) ON DELETE CASCADE,
+    sets INT NOT NULL,
+    reps INT NOT NULL,
+    weight FLOAT NOT NULL
 );
