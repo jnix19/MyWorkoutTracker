@@ -18,7 +18,12 @@ struct ExerciseGridView: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(exercises) { exercise in
-                        ExerciseGridCell(exerciseName: exercise.name)
+                        NavigationLink{
+                            ExerciseDetailView(exercise: exercise)
+                        } label: {
+                            ExerciseGridCell(exerciseName: exercise.name)
+                        }
+                        //ExerciseGridCell(exerciseName: exercise.name)
                     }
                 }
             }

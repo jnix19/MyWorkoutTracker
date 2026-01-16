@@ -15,7 +15,11 @@ struct WorkoutListView: View {
         
         NavigationStack {
             List(workouts) { workout in
-                WorkoutListCell(workout: workout)
+                NavigationLink{
+                    WorkoutDetailView(workout: workout)
+                } label: {
+                    WorkoutListCell(workout: workout)
+                }
             }
             .padding(.top)
             .navigationTitle("Workouts")

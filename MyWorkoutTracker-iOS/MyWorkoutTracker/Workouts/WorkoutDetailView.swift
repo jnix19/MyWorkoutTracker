@@ -57,9 +57,9 @@ struct WorkoutDetailView: View {
                 }
                 .padding(.horizontal, 15)
             }
-            .frame(width: 320, height: 500, alignment: .top)
+            .frame(width: 320, height: 600, alignment: .top)
         }
-        .frame(width: 320, height: 500)
+        .frame(width: 320, height: 600)
         .shadow(radius: 1)
     }
 }

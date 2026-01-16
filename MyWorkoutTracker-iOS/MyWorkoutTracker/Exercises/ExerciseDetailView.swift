@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct ExerciseDetailView: View {
+    
+    let exercise: Exercise
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 25)
                 .fill(Color(.systemGray5))
                 .shadow(radius: 5)
-            Text("Exercise Details")
+            Text(exercise.name)
         }
-        .frame(width: 320, height: 500)
+        .frame(width: 320, height: 600)
         .shadow(radius: 1)
     }
 }
 
 #Preview {
-    ExerciseDetailView()
+    ExerciseDetailView(exercise: SampleExercises.benchPressExample)
 }
